@@ -1,1 +1,28 @@
-const menu=document.getElementById("menu"),nav=document.querySelector("nav");menu.addEventListener("click",()=>{nav.style.display=nav.style.display==="flex"?"none":"flex";nav.style.flexDirection="column";nav.style.position="absolute";nav.style.top="76px";nav.style.right="4%";nav.style.background="#fff";nav.style.padding="18px";nav.style.borderRadius="12px";nav.style.boxShadow="0 15px 40px #0002"});document.getElementById("form").addEventListener("submit",e=>{e.preventDefault();document.getElementById("msg").textContent="Appointment request received in this demo. The live booking system will be connected later.";e.target.reset()});
+const form = document.getElementById("form");
+const msg = document.getElementById("msg");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const name = form.elements["name"].value.trim();
+  const mobile = form.elements["mobile"].value.trim();
+  const course = form.elements["course"].value;
+  const date = form.elements["date"].value;
+  const time = form.elements["time"].value;
+
+  const message =
+    "New Appointment Request%0A%0A" +
+    "Name: " + encodeURIComponent(name) + "%0A" +
+    "Mobile: " + encodeURIComponent(mobile) + "%0A" +
+    "Course: " + encodeURIComponent(course) + "%0A" +
+    "Date: " + encodeURIComponent(date) + "%0A" +
+    "Time: " + encodeURIComponent(time);
+
+  const whatsappNumber = "918975142323";
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber + "?text=" + message;
+
+  msg.textContent = "Opening WhatsApp...";
+
+  window.open(whatsappURL, "_blank");
+});
